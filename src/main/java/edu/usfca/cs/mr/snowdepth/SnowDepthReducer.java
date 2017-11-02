@@ -1,5 +1,6 @@
 package edu.usfca.cs.mr.snowdepth;
 
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -16,7 +17,7 @@ import static java.lang.Boolean.TRUE;
  * <word, total count> pairs.
  */
 public class SnowDepthReducer
-extends Reducer<Text, IntWritable, Text, IntWritable> {
+extends Reducer<Text, IntWritable, Text, FloatWritable> {
 
     @Override
     protected void reduce(
@@ -25,7 +26,7 @@ extends Reducer<Text, IntWritable, Text, IntWritable> {
         int count = 0;
         boolean snow_exists = TRUE;
         // calculate the total count
-        int max_depth = 0;
+        float max_depth = 0;
         for(IntWritable val : values){
             if(val.get()>max_depth)
                 max_depth = val.get();
@@ -33,7 +34,7 @@ extends Reducer<Text, IntWritable, Text, IntWritable> {
                 snow_exists = FALSE;
         }
         if(snow_exists)
-            context.write(key, new IntWritable(max_depth));
+            context.write(key, new FloatWritable(max_depth));
     }
 
 }
