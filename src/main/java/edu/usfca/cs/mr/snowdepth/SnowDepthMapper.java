@@ -23,7 +23,6 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
         int index = 0;
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
-            IntWritable record= new IntWritable(Integer.parseInt(token));
             String geoHash = "";
             if(index == 1)
             {
@@ -31,6 +30,7 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
             }
             else if(index==50)
             {
+                IntWritable record= new IntWritable(Integer.parseInt(token));
                 context.write(new Text(geoHash), record);
             }
 
