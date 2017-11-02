@@ -23,14 +23,14 @@ extends Reducer<Text, IntWritable, Text, IntWritable> {
             Text key, Iterable<IntWritable> values, Context context)
     throws IOException, InterruptedException {
         int count = 0;
-        boolean snow_exists = FALSE;
+        boolean snow_exists = TRUE;
         // calculate the total count
         int max_depth = 0;
         for(IntWritable val : values){
             if(val.get()>max_depth)
                 max_depth = val.get();
-            if(val.get()>0)
-                snow_exists = TRUE;
+            if(val.get()==0)
+                snow_exists = FALSE;
         }
         if(snow_exists)
             context.write(key, new IntWritable(max_depth));
