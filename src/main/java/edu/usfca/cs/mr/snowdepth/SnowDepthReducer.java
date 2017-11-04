@@ -17,17 +17,17 @@ import static java.lang.Boolean.TRUE;
  * <word, total count> pairs.
  */
 public class SnowDepthReducer
-extends Reducer<Text, IntWritable, Text, FloatWritable> {
+extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
     @Override
     protected void reduce(
-            Text key, Iterable<IntWritable> values, Context context)
+            Text key, Iterable<FloatWritable> values, Context context)
     throws IOException, InterruptedException {
         int count = 0;
         boolean snow_exists = TRUE;
         // calculate the total count
         float max_depth = 0;
-        for(IntWritable val : values){
+        for(FloatWritable val : values){
             if(val.get()>max_depth)
                 max_depth = val.get();
             if(val.get()==0)
