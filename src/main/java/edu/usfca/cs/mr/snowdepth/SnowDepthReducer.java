@@ -30,7 +30,8 @@ extends Reducer<Text, FloatWritable, Text, FloatWritable> {
         for(FloatWritable val : values){
             if(val.get()>max_depth)
                 max_depth = val.get();
-            if(val.get()==0)
+            int diff = Float.compare(val.get(),0.0f);
+            if(diff==0)
                 snow_exists = FALSE;
         }
         if(snow_exists)
