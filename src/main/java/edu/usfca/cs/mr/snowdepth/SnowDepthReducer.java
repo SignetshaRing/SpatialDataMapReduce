@@ -34,7 +34,7 @@ extends Reducer<Text, FloatWritable, Text, FloatWritable> {
             if(diff==0)
                 snow_exists = FALSE;
         }
-//        if(snow_exists)
+        if(snow_exists)
             context.write(key, new FloatWritable(max_depth));
     }
 

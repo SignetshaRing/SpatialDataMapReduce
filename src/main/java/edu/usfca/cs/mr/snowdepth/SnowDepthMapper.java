@@ -22,9 +22,9 @@ extends Mapper<LongWritable, Text, Text, FloatWritable> {
         StringTokenizer itr = new StringTokenizer(value.toString());
         // emit word, count pairs.
         int index = 0;
+        String geoHash = "";
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
-            String geoHash = "";
             if(index == 1)
             {
                 geoHash = token;
