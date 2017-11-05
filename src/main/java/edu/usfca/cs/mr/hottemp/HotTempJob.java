@@ -19,7 +19,7 @@ public class HotTempJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "word count job");
+            Job job = Job.getInstance(conf, "Hottest temp job");
             // Current class.
             job.setJarByClass(HotTempJob.class);
             // Mapper
@@ -30,12 +30,12 @@ public class HotTempJob {
             job.setReducerClass(HotTempReducer.class);
             // Outputs from the Mapper.
             job.setMapOutputKeyClass(Text.class);
-            job.setMapOutputValueClass(IntWritable.class);
+            job.setMapOutputValueClass(Text.class);
             // Outputs from Reducer. It is sufficient to set only the following
             // two properties if the Mapper and Reducer has same key and value
             // types. It is set separately for elaboration.
             job.setOutputKeyClass(Text.class);
-            job.setOutputValueClass(IntWritable.class);
+            job.setOutputValueClass(Text.class);
             // path to input in HDFS
             FileInputFormat.addInputPath(job, new Path(args[0]));
             // path to output in HDFS

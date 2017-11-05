@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
  */
 public class HotTempMapper
-extends Mapper<LongWritable, Text, Text, IntWritable> {
+extends Mapper<LongWritable, Text, Text, Text> {
 
     @Override
     protected void map(LongWritable key, Text value, Context context)
@@ -20,8 +20,23 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
         // emit word, count pairs.
+        int index = 0;
+        String timestamp = "";
+        String geohash = "";
+        String temp = "";
         while (itr.hasMoreTokens()) {
-            context.write(new Text(itr.nextToken()), new IntWritable(1));
+            String token = itr.nextToken();
+            if(index == 0)
+                timestamp = token;
+            else if(index == 1)
+                geohash = token;
+            else if(index == 40)
+            {
+                temp = token;
+                String record = timestamp+","+geohash+","+temp;
+                context.write(new Text("record"), new Text(record));
+            }
+            index++;
         }
     }
 }
