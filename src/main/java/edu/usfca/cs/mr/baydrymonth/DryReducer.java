@@ -22,9 +22,9 @@ extends Reducer<Text, Text, Text, Text> {
     throws IOException, InterruptedException {
         int count = 0;
         // calculate the total count
-        String dry_ts = "";
+        String dry_ts = null;
         Float low_precip = Float.MAX_VALUE;
-        String dry_geo = "";
+        String dry_geo = null;
         List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
                 "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
         for(Text record : values){
@@ -35,6 +35,7 @@ extends Reducer<Text, Text, Text, Text> {
             Float precip = Float.parseFloat(data.get(2));
 
             dry_ts = timestamp;
+            dry_geo = geohash;
             if(bay_area.contains(geohash))
             {
                 if(precip<low_precip)
@@ -48,14 +49,10 @@ extends Reducer<Text, Text, Text, Text> {
 
         Date date = new Date(Long.parseLong(dry_ts));
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-//        String formatted = format.format(date);
-//        System.out.println(formatted);
-//        format.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String date_format = format.format(date);
-        int dry_month = cal.get(Calendar.MONTH);
+        String dry_month = Integer.toString(cal.get(Calendar.MONTH));
 
         context.write(key, new Text(dry_geo+", "+low_precip+", "+dry_month+", "+date_format));
     }
