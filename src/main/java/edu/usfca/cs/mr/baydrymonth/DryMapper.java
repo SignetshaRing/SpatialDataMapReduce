@@ -5,6 +5,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -34,7 +37,9 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 precip = token;
                 // Limiting the data to be MapReduced by only passing
                 // geohashes starting with 9q
-                if(geohash.substring(0,2).equals("9q"))
+                List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
+                        "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
+                if(bay_area.contains(geohash.substring(0,4)))
                 {
                     geohash = geohash.substring(0,4);
                     String record = timestamp+","+geohash+","+precip;
