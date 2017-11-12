@@ -23,7 +23,7 @@ extends Reducer<Text, Text, Text, Text> {
         int count = 0;
         // calculate the total count
         String dry_ts = null;
-        Float low_precip = Float.MAX_VALUE;
+        Long low_precip = Long.MAX_VALUE;
         String dry_geo = null;
         String date_format = "";
         String dry_month = "";
@@ -34,13 +34,13 @@ extends Reducer<Text, Text, Text, Text> {
             List<String> data = Arrays.asList(rec.split(","));
             String timestamp = data.get(0);
             String geohash = data.get(1);
-            Float precip = Float.parseFloat(data.get(2));
-
+            String precipitation = (data.get(2));
+            long precip_long = Double.valueOf(precipitation).longValue();
 //            dry_ts = timestamp;
 //            dry_geo = geohash;
             if (bay_area.contains(geohash)) {
-                if (precip < low_precip) {
-                    low_precip = precip;
+                if (precip_long < low_precip) {
+                    low_precip = precip_long;
                     dry_ts = timestamp;
                     dry_geo = geohash;
 
