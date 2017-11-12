@@ -38,8 +38,8 @@ extends Reducer<Text, Text, Text, Text> {
 
                 if (humid < low_humid) {
                     low_humid = humid;
-                    dry_ts = geohash;
-                    dry_geo = geohash;
+                    dry_ts = timestamp;
+                    dry_geo = timestamp;
                 }
 
         }
