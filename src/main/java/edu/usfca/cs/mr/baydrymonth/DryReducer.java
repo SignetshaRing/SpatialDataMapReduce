@@ -34,6 +34,7 @@ extends Reducer<Text, Text, Text, Text> {
             String geohash = data.get(1);
             Float precip = Float.parseFloat(data.get(2));
 
+            dry_ts = timestamp;
             if(bay_area.contains(geohash))
             {
                 if(precip<low_precip)
