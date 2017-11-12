@@ -5,10 +5,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
@@ -42,8 +41,14 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 if(bay_area.contains(geohash.substring(0,4)))
                 {
                     geohash = geohash.substring(0,4);
-                    String record = timestamp+","+geohash+","+humid;
-                    context.write(new Text("record"), new Text(record));
+                    String record = humid;
+
+                    Date date = new Date(Long.parseLong(timestamp));
+                    DateFormat format = new SimpleDateFormat("MM/yyyy");
+                    String date_format = format.format(date);
+
+
+                    context.write(new Text(date_format), new Text(record));
                 }
             }
             index++;

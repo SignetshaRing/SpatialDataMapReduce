@@ -1,8 +1,7 @@
-package edu.usfca.cs.mr.baydrymonth;
+package edu.usfca.cs.mr.travelusf;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -13,7 +12,7 @@ import java.io.IOException;
 /**
  * This is the main class. Hadoop will invoke the main method of this class.
  */
-public class DryJob {
+public class TravelJob {
     public static void main(String[] args) {
         try {
             Configuration conf = new Configuration();
@@ -21,13 +20,13 @@ public class DryJob {
             // webapp.
             Job job = Job.getInstance(conf, "Hottest temp job");
             // Current class.
-            job.setJarByClass(DryJob.class);
+            job.setJarByClass(TravelJob.class);
             // Mapper
-            job.setMapperClass(DryMapper.class);
+            job.setMapperClass(TravelMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(DryReducer.class);
+            job.setCombinerClass(TravelReducer.class);
             // Reducer
-            job.setReducerClass(DryReducer.class);
+            job.setReducerClass(TravelReducer.class);
             // Outputs from the Mapper.
             job.setMapOutputKeyClass(Text.class);
             job.setMapOutputValueClass(Text.class);
@@ -35,7 +34,7 @@ public class DryJob {
             // two properties if the Mapper and Reducer has same key and value
             // types. It is set separately for elaboration.
             job.setOutputKeyClass(Text.class);
-            job.setOutputValueClass(FloatWritable.class);
+            job.setOutputValueClass(Text.class);
             // path to input in HDFS
             FileInputFormat.addInputPath(job, new Path(args[0]));
             // path to output in HDFS
