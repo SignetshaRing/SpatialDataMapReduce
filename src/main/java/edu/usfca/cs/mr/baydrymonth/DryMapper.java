@@ -25,16 +25,16 @@ extends Mapper<LongWritable, Text, Text, Text> {
         int index = 0;
         String timestamp = "";
         String geohash = "";
-        String precip = "";
+        String humid = "";
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 0)
                 timestamp = token;
             else if(index == 1)
                 geohash = token;
-            else if(index == 55)
+            else if(index == 12)
             {
-                precip = token;
+                humid = token;
                 // Limiting the data to be MapReduced by only passing
                 // geohashes starting with 9q
                 List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
@@ -42,7 +42,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 if(bay_area.contains(geohash.substring(0,4)))
                 {
                     geohash = geohash.substring(0,4);
-                    String record = timestamp+","+geohash+","+precip;
+                    String record = timestamp+","+geohash+","+humid;
                     context.write(new Text("record"), new Text(record));
                 }
             }

@@ -23,24 +23,24 @@ extends Reducer<Text, Text, Text, Text> {
         int count = 0;
         // calculate the total count
         String dry_ts = null;
-        Long low_precip = Long.MAX_VALUE;
+        Float low_humid = Float.MAX_VALUE;
         String dry_geo = null;
         String date_format = "";
         String dry_month = "";
-        List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
-                "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
+//        List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
+//                "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
         for(Text record : values) {
             String rec = record.toString();
             List<String> data = Arrays.asList(rec.split(","));
             String timestamp = data.get(0);
             String geohash = data.get(1);
-            String precipitation = (data.get(2));
-            long precip_long = Double.valueOf(precipitation).longValue();
+            Float humid = Float.parseFloat(data.get(2));
+
 //            dry_ts = timestamp;
 //            dry_geo = geohash;
-            if (bay_area.contains(geohash)) {
-                if (precip_long < low_precip) {
-                    low_precip = precip_long;
+//            if (bay_area.contains(geohash)) {
+                if (humid < low_humid) {
+                    low_humid = humid;
                     dry_ts = timestamp;
                     dry_geo = geohash;
 
@@ -51,9 +51,9 @@ extends Reducer<Text, Text, Text, Text> {
                     date_format = format.format(date);
                     dry_month = Integer.toString(cal.get(Calendar.MONTH));
                 }
-            }
+
         }
-        context.write(key, new Text(dry_geo+", "+low_precip+", "+dry_month+", "+date_format));
+        context.write(key, new Text(dry_geo+", "+low_humid+", "+dry_month+", "+date_format));
     }
 
 }
