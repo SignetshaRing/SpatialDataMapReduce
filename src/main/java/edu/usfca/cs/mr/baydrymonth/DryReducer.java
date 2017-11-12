@@ -45,7 +45,7 @@ extends Reducer<Text, Text, Text, Text> {
             }
         }
 
-        Date date = new Date(Integer.parseInt(dry_ts));
+        Date date = new Date(Long.parseLong(dry_ts));
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 //        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
 //        String formatted = format.format(date);
