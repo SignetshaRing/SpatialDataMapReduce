@@ -25,9 +25,11 @@ extends Reducer<Text, Text, Text, Text> {
         String dry_ts = null;
         Float low_precip = Float.MAX_VALUE;
         String dry_geo = null;
+        String date_format = "";
+        String dry_month = "";
         List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
                 "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
-        for(Text record : values){
+        for(Text record : values) {
             String rec = record.toString();
             List<String> data = Arrays.asList(rec.split(","));
             String timestamp = data.get(0);
@@ -36,24 +38,21 @@ extends Reducer<Text, Text, Text, Text> {
 
 //            dry_ts = timestamp;
 //            dry_geo = geohash;
-            if(bay_area.contains(geohash))
-            {
-                if(precip<low_precip)
-                {
+            if (bay_area.contains(geohash)) {
+                if (precip < low_precip) {
                     low_precip = precip;
                     dry_ts = timestamp;
                     dry_geo = geohash;
+
+                    Date date = new Date(Long.parseLong(dry_ts));
+                    DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date);
+                    date_format = format.format(date);
+                    dry_month = Integer.toString(cal.get(Calendar.MONTH));
                 }
             }
         }
-
-        Date date = new Date(Long.parseLong(dry_ts));
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String date_format = format.format(date);
-        String dry_month = Integer.toString(cal.get(Calendar.MONTH));
-
         context.write(key, new Text(dry_geo+", "+low_precip+", "+dry_month+", "+date_format));
     }
 
