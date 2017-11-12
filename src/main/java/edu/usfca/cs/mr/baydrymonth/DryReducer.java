@@ -23,7 +23,7 @@ extends Reducer<Text, Text, Text, Text> {
         int count = 0;
         // calculate the total count
         String dry_ts = "";
-        Float low_precip = 0f;
+        Float low_precip = Float.MAX_VALUE;
         String dry_geo = "";
         List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
                 "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
