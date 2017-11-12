@@ -21,20 +21,12 @@ extends Reducer<Text, Text, Text, FloatWritable> {
     protected void reduce(
             Text key, Iterable<Text> values, Context context)
     throws IOException, InterruptedException {
-        int count = 0;
-        // calculate the total count
-        String dry_ts = null;
-        Float low_humid = Float.MAX_VALUE;
-        String dry_geo = null;
-        String date_format = "";
-        String dry_month = "";
+
         Float total_humid = 0f;
         int index = 0;
         for(Text record : values) {
             String rec = record.toString();
-//            List<String> data = Arrays.asList(rec.split(","));
-//            String timestamp = data.get(0);
-//            String geohash = data.get(1);
+
             Float humid = Float.parseFloat(rec);
 
             total_humid+=humid;
