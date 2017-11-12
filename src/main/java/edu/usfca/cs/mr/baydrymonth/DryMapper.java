@@ -36,6 +36,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 // geohashes starting with 9q
                 if(geohash.substring(0,2).equals("9q"))
                 {
+                    geohash = geohash.substring(0,4);
                     String record = timestamp+","+geohash+","+precip;
                     context.write(new Text("record"), new Text(record));
                 }

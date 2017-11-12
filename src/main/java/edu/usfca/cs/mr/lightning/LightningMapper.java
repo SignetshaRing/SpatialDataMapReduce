@@ -25,7 +25,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 1)
-                geohash = token.substring(0,5);
+                geohash = token.substring(0,4);
             else if(index == 22)
             {
                 light = token;
