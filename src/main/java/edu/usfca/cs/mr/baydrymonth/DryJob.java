@@ -19,7 +19,7 @@ public class DryJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Hottest temp job");
+            Job job = Job.getInstance(conf, "Dry job");
             // Current class.
             job.setJarByClass(DryJob.class);
             // Mapper
@@ -30,7 +30,7 @@ public class DryJob {
             job.setReducerClass(DryReducer.class);
             // Outputs from the Mapper.
             job.setMapOutputKeyClass(Text.class);
-            job.setMapOutputValueClass(Text.class);
+            job.setMapOutputValueClass(FloatWritable.class);
             // Outputs from Reducer. It is sufficient to set only the following
             // two properties if the Mapper and Reducer has same key and value
             // types. It is set separately for elaboration.

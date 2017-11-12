@@ -15,19 +15,17 @@ import java.util.*;
  * <word, total count> pairs.
  */
 public class DryReducer
-extends Reducer<Text, Text, Text, FloatWritable> {
+extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
     @Override
     protected void reduce(
-            Text key, Iterable<Text> values, Context context)
+            Text key, Iterable<FloatWritable> values, Context context)
     throws IOException, InterruptedException {
 
         Float total_humid = 0f;
         int index = 0;
-        for(Text record : values) {
-            String rec = record.toString();
-
-            Float humid = Float.parseFloat(rec);
+        for(FloatWritable record : values) {
+            Float humid = record.get();
 
             total_humid+=humid;
             index+=1;

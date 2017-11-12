@@ -1,5 +1,6 @@
 package edu.usfca.cs.mr.baydrymonth;
 
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -13,7 +14,7 @@ import java.util.*;
  * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
  */
 public class DryMapper
-extends Mapper<LongWritable, Text, Text, Text> {
+extends Mapper<LongWritable, Text, Text, FloatWritable> {
 
     @Override
     protected void map(LongWritable key, Text value, Context context)
@@ -48,7 +49,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
                     String date_format = format.format(date);
 
 
-                    context.write(new Text(date_format), new Text(record));
+                    context.write(new Text(date_format), new FloatWritable(Float.parseFloat(record)));
                 }
             }
             index++;
