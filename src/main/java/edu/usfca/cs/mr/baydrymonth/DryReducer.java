@@ -36,23 +36,21 @@ extends Reducer<Text, Text, Text, Text> {
             String geohash = data.get(1);
             Float humid = Float.parseFloat(data.get(2));
 
-//            dry_ts = timestamp;
-//            dry_geo = geohash;
-//            if (bay_area.contains(geohash)) {
                 if (humid < low_humid) {
                     low_humid = humid;
-                    dry_ts = timestamp;
+                    dry_ts = geohash;
                     dry_geo = geohash;
-
-                    Date date = new Date(Long.parseLong(dry_ts));
-                    DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(date);
-                    date_format = format.format(date);
-                    dry_month = Integer.toString(cal.get(Calendar.MONTH));
                 }
 
         }
+
+        Date date = new Date(Long.parseLong(dry_ts));
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        date_format = format.format(date);
+        dry_month = Integer.toString(cal.get(Calendar.MONTH));
+
         context.write(key, new Text(dry_geo+", "+low_humid+", "+dry_month+", "+date_format));
     }
 
