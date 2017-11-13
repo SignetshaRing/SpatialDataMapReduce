@@ -33,7 +33,7 @@ extends Reducer<Text, Text, Text, Text> {
             Float wind_speed = Float.parseFloat(data.get(1));
             Float cloud_cover = Float.parseFloat(data.get(2));
 
-            total_humid+=humid;
+//            total_humid+=humid;
             index+=1;
 
         }
@@ -45,7 +45,7 @@ extends Reducer<Text, Text, Text, Text> {
 //        date_format = format.format(date);
 //        dry_month = Integer.toString(cal.get(Calendar.MONTH));
 
-        context.write(key, new FloatWritable(total_humid/index));
+//        context.write(key, new FloatWritable(total_humid/index));
     }
 
 }
