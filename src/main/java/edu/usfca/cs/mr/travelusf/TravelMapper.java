@@ -5,6 +5,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -19,10 +22,30 @@ extends Mapper<LongWritable, Text, Text, Text> {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
         // emit word, count pairs.
+
+        /* Locations Used for itinerary
+
+        9q8zhu -> Golden gate bridge
+        87z9py -> Honolulu
+        9w2m2v -> Grand canyon
+        dk2yqv -> The bahamas
+        9q5fh5 -> Griffith Observatory
+
+        We'll use a Heohash accuracy of 5 positions
+         */
+
+        /*
+        Suitable travel conditions are considered to an ambient temperature
+        between 20 to 30 Celsius
+        which is 293.15K to 303.15K
+         */
+
+        List<String> travel_locations= new ArrayList<>(Arrays.asList("9q8zh","87z9p","9w2m2","dk2yq","9q5fh"));
+
         int index = 0;
         String timestamp = "";
         String geohash = "";
-        String temp = "";
+        Float temp;
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 0)
@@ -31,9 +54,16 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 geohash = token;
             else if(index == 40)
             {
-                temp = token;
-                String record = timestamp+","+geohash+","+temp;
-                context.write(new Text("record"), new Text(record));
+                temp = Float.parseFloat(token);
+                if(travel_locations.contains(geohash))
+                {
+                    if(temp>293 && temp<303)
+                    {
+                        String record = timestamp+","+temp;
+                        context.write(new Text(geohash), new Text(record));
+                    }
+
+                }
             }
             index++;
         }

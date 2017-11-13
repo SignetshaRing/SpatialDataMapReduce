@@ -4,7 +4,10 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,26 +22,19 @@ extends Reducer<Text, Text, Text, Text> {
     protected void reduce(
             Text key, Iterable<Text> values, Context context)
     throws IOException, InterruptedException {
-        int count = 0;
-        // calculate the total count
-        String finalTS = "";
-        String finalGeohash = "";
-        Float finalTemp = 0f;
         for(Text record : values){
             String rec = record.toString();
             List<String> data = Arrays.asList(rec.split(","));
             String timestamp = data.get(0);
-            String geohash = data.get(1);
-            Float temp = Float.parseFloat(data.get(2));
+            Float temp = Float.parseFloat(data.get(1));
 
-            if(temp>finalTemp)
-            {
-                finalTemp = temp;
-                finalTS = timestamp;
-                finalGeohash = geohash;
-            }
+            Date date = new Date(Long.parseLong(timestamp));
+            DateFormat format = new SimpleDateFormat("MM/yyyy");
+            String date_format = format.format(date);
+
+            context.write(key,new Text(date_format+", "+Float.toString(temp)));
         }
-        context.write(key, new Text(finalTS+","+finalGeohash+","+finalTemp.toString()));
+
     }
 
 }
