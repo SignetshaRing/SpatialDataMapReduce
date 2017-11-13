@@ -40,7 +40,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
         which is 293.15K to 303.15K
          */
 
-        List<String> travel_locations= new ArrayList<>(Arrays.asList("9q8zh","87z9p","9w2m2","dk2yq","9q5fh"));
+        List<String> travel_locations= new ArrayList<>(Arrays.asList("9q8z","87z9","9w2m","dk2y","9q5f"));
 
         int index = 0;
         String timestamp = "";
@@ -58,8 +58,8 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 geohash = geohash.substring(0,5);
                 if(travel_locations.contains(geohash))
                 {
-//                    if(temp>293 && temp<303)
-                    if(temp>293)
+                    if(temp>293 && temp<303)
+//                    if(temp>293)
                     {
                         String record = timestamp+","+temp;
                         context.write(new Text(geohash), new Text(record));
