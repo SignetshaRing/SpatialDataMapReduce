@@ -25,7 +25,7 @@ public class GreenJob {
             // Mapper
             job.setMapperClass(GreenMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(GreenReducer.class);
+//            job.setCombinerClass(GreenReducer.class);
             // Reducer
             job.setReducerClass(GreenReducer.class);
             // Outputs from the Mapper.

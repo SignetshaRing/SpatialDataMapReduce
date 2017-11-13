@@ -22,6 +22,9 @@ extends Reducer<Text, Text, Text, Text> {
 
         Map<String,List<Float>> wind_map = new TreeMap<>();
         Map<String,List<Float>> cloud_map = new TreeMap<>();
+        Map<String,Float> top_wind_map = new TreeMap<>();
+        Map<String,Float> top_cloud_map = new TreeMap<>();
+
         int index = 0;
         for(Text record : values) {
             String rec = record.toString();
@@ -60,12 +63,53 @@ extends Reducer<Text, Text, Text, Text> {
         Iterator it = wind_map.entrySet().iterator();
         while(it.hasNext())
         {
-//            Float total_wind = 0;
+            Float total_wind = 0f;
             Map.Entry pair = (Map.Entry)it.next();
-            for (Float wind:(List<Float>)pair.getValue()) {
-
+            for (Float wind:(List<Float>)pair.getValue())
+            {
+                total_wind+=wind;
             }
+
+            top_wind_map.put((String)pair.getKey(),total_wind/((List<Float>)pair.getValue()).size());
+
         }
+
+        Iterator it2 = cloud_map.entrySet().iterator();
+        while(it2.hasNext())
+        {
+            Float total_cloud = 0f;
+            Map.Entry pair = (Map.Entry)it2.next();
+            for (Float cloud:(List<Float>)pair.getValue())
+            {
+                total_cloud+=cloud;
+            }
+
+            top_cloud_map.put((String)pair.getKey(),total_cloud/((List<Float>)pair.getValue()).size());
+
+        }
+
+        // Sorting the top cloud and wind maps(Increasing order)
+
+        LinkedHashMap<String,Float> sorted_cloud = OrderByValue(top_cloud_map);
+        LinkedHashMap<String,Float> sorted_wind = OrderByValue(top_wind_map);
+
+        // Output top3 values
+        int top_count = 3;
+
+        for(int i = 0;i<top_count;i++)
+        {
+            String cloud_key = (new ArrayList<String>(sorted_cloud.keySet())).get(i);
+            Float value = (new ArrayList<Float>(sorted_cloud.values())).get(i);
+            context.write(key,new Text("Cloud: "+cloud_key+" "+Float.toString(value)));
+        }
+
+        for(int i = 0;i<top_count;i++)
+        {
+            String wind_key = (new ArrayList<String>(sorted_wind.keySet())).get(sorted_wind.size()-i);
+            Float value = (new ArrayList<Float>(sorted_wind.values())).get(sorted_wind.size()-i);
+            context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)));
+        }
+
 
 //        Date date = new Date(Long.parseLong(dry_ts));
 //        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -75,6 +119,28 @@ extends Reducer<Text, Text, Text, Text> {
 //        dry_month = Integer.toString(cal.get(Calendar.MONTH));
 
 //        context.write(key, new FloatWritable(total_humid/index));
+    }
+
+
+    public LinkedHashMap<String,Float> OrderByValue(Map<String,Float> map)
+    {
+        Set<Map.Entry<String, Float>> set = map.entrySet();
+        List<Map.Entry<String, Float>> list = new ArrayList<Map.Entry<String, Float>>(set);
+        Collections.sort( list, new Comparator<Map.Entry<String, Float>>()
+        {
+            public int compare( Map.Entry<String, Float> o1, Map.Entry<String, Float> o2 )
+            {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        } );
+
+
+        LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<String, Float>();
+        for (Map.Entry<String, Float> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedMap;
     }
 
 }
