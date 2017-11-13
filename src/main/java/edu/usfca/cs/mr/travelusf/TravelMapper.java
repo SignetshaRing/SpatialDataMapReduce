@@ -58,8 +58,8 @@ extends Mapper<LongWritable, Text, Text, Text> {
                 geohash = geohash.substring(0,4);
                 if(travel_locations.contains(geohash))
                 {
-//                    if(temp>293 && temp<303)
-                    if(temp>293)
+                    if(temp>293 && temp<303)
+//                    if(temp>293)
                     {
                         String record = timestamp+","+temp;
                         context.write(new Text(geohash), new Text(record));
