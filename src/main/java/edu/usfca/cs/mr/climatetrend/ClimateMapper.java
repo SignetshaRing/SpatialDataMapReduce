@@ -24,7 +24,8 @@ extends Mapper<LongWritable, Text, Text, Text> {
         // emit word, count pairs.
         int index = 0;
         String timestamp = "";
-        String target_geohash = "9q8ytxu5et";
+//        String target_geohash = "9q8ytxu5et";
+        String target_geohash = "d59d5yttuc5b";
         String geohash = "";
         String temp = "";
         String precip = "";
