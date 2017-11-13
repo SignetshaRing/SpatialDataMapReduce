@@ -63,6 +63,8 @@ extends Reducer<Text, Text, Text, Text> {
 
         String output = month_num+" "+maxTemp+" "+minTemp+" "+avgPrecip+" "+avgTemp;
 
+        context.write(key, new Text(output));
+
         String file_name = "Climate_Trend_"+geohash+".txt";
         try(FileWriter fw = new FileWriter(file_name, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -73,7 +75,6 @@ extends Reducer<Text, Text, Text, Text> {
             System.out.println("Error while writing to File");
         }
 
-        context.write(key, new Text(output));
     }
 
 }
