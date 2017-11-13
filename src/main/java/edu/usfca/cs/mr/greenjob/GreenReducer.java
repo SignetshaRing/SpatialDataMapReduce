@@ -34,6 +34,8 @@ extends Reducer<Text, Text, Text, Text> {
             Float cloud_cover = Float.parseFloat(data.get(2));
             soil_porosity = Float.parseFloat(data.get(3));
 
+            context.write(key, new Text("Soil:"+soil_porosity+"Geohash"+geohash));
+
             if(!wind_map.containsKey(geohash))
             {
                 List wind = new ArrayList();
