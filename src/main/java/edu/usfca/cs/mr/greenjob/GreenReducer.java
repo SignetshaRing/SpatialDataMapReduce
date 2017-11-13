@@ -48,7 +48,7 @@ extends Reducer<Text, Text, Text, Text> {
             {
                 List cloud = new ArrayList();
                 cloud.add(cloud_cover);
-                wind_map.put(geohash,cloud);
+                cloud_map.put(geohash,cloud);
             }
             else
             {
