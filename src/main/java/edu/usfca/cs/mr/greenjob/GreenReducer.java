@@ -105,8 +105,8 @@ extends Reducer<Text, Text, Text, Text> {
 
         for(int i = 0;i<top_count;i++)
         {
-            String wind_key = (new ArrayList<String>(sorted_wind.keySet())).get(sorted_wind.size()-i+1);
-            Float value = (new ArrayList<Float>(sorted_wind.values())).get(sorted_wind.size()-i+1);
+            String wind_key = (new ArrayList<String>(sorted_wind.keySet())).get(sorted_wind.size()-i-1);
+            Float value = (new ArrayList<Float>(sorted_wind.values())).get(sorted_wind.size()-i-1);
             context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)));
         }
 
