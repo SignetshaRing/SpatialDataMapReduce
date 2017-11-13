@@ -157,7 +157,7 @@ extends Reducer<Text, Text, Text, Text> {
         for(int i = 0;i<top_count;i++)
         {
             String combined_geo = (new ArrayList<String>(sorted_ranks.keySet())).get(i);
-            context.write(key,new Text("Combined Wind and Solar farm\n" +
+            context.write(key,new Text("Combined Wind and Solar farm:" +combined_geo+"\n"+
                     "Cloud: "+top_cloud_map.get(combined_geo)+" Wind: "+top_wind_map.get(combined_geo)));
         }
 
