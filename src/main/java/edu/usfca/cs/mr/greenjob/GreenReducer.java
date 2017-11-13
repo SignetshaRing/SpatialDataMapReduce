@@ -127,7 +127,7 @@ extends Reducer<Text, Text, Text, Text> {
 
         // Creating rank list of wind and cloud maps
 
-        Iterator wind_it = top_wind_map.entrySet().iterator();
+        Iterator wind_it = sorted_wind.entrySet().iterator();
         while(wind_it.hasNext())
         {
             Map.Entry pair = (Map.Entry) wind_it.next();
@@ -137,7 +137,7 @@ extends Reducer<Text, Text, Text, Text> {
         // Reversing wind rank, since higher winds are at the end of the list in top_wind_map
         Collections.reverse(wind_rank);
 
-        Iterator cloud_it = top_cloud_map.entrySet().iterator();
+        Iterator cloud_it = sorted_cloud.entrySet().iterator();
         while(cloud_it.hasNext())
         {
             Map.Entry pair = (Map.Entry) cloud_it.next();

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * line, list<count> pairs.  Sums up individual counts. Emits
+ * <line, total count> pairs.
  */
 public class RecordCountReducer
 extends Reducer<Text, IntWritable, Text, IntWritable> {

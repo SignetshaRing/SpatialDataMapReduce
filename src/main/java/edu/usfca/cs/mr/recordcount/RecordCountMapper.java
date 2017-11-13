@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line. Emit <"line", 1> pairs.
  */
 public class RecordCountMapper
 extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -17,9 +17,8 @@ extends Mapper<LongWritable, Text, Text, IntWritable> {
     @Override
     protected void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
-        // tokenize into words.
-        // emit word, count pairs.
-        context.write(new Text(""), new IntWritable(1));
+
+        context.write(new Text("line"), new IntWritable(1));
 
     }
 }
