@@ -18,13 +18,13 @@ public class ClimateJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Hottest temp job");
+            Job job = Job.getInstance(conf, "Climate Trend job");
             // Current class.
             job.setJarByClass(ClimateJob.class);
             // Mapper
             job.setMapperClass(ClimateMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(ClimateReducer.class);
+//            job.setCombinerClass(ClimateReducer.class);
             // Reducer
             job.setReducerClass(ClimateReducer.class);
             // Outputs from the Mapper.
