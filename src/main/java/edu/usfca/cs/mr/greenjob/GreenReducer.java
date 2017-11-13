@@ -24,7 +24,7 @@ extends Reducer<Text, Text, Text, Text> {
         Map<String,List<Float>> cloud_map = new TreeMap<>();
         Map<String,Float> top_wind_map = new TreeMap<>();
         Map<String,Float> top_cloud_map = new TreeMap<>();
-
+        Float soil_porosity = 0f;
         int index = 0;
         for(Text record : values) {
             String rec = record.toString();
@@ -32,6 +32,7 @@ extends Reducer<Text, Text, Text, Text> {
             String geohash = data.get(0);
             Float wind_speed = Float.parseFloat(data.get(1));
             Float cloud_cover = Float.parseFloat(data.get(2));
+            soil_porosity = Float.parseFloat(data.get(3));
 
             if(!wind_map.containsKey(geohash))
             {
@@ -100,14 +101,14 @@ extends Reducer<Text, Text, Text, Text> {
         {
             String cloud_key = (new ArrayList<String>(sorted_cloud.keySet())).get(i);
             Float value = (new ArrayList<Float>(sorted_cloud.values())).get(i);
-            context.write(key,new Text("Cloud: "+cloud_key+" "+Float.toString(value)));
+            context.write(key,new Text("Cloud: "+cloud_key+" "+Float.toString(value)+"\nSoil:"+soil_porosity));
         }
 
         for(int i = 0;i<top_count;i++)
         {
             String wind_key = (new ArrayList<String>(sorted_wind.keySet())).get(sorted_wind.size()-i-1);
             Float value = (new ArrayList<Float>(sorted_wind.values())).get(sorted_wind.size()-i-1);
-            context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)));
+            context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)+"\nSoil:"+soil_porosity));
         }
 
 
