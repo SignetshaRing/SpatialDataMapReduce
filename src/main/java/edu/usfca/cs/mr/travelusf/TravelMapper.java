@@ -55,6 +55,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
             else if(index == 40)
             {
                 temp = Float.parseFloat(token);
+                geohash = geohash.substring(0,5);
                 if(travel_locations.contains(geohash))
                 {
                     if(temp>293 && temp<303)
