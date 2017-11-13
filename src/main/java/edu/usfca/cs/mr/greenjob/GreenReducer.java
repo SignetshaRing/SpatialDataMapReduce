@@ -24,6 +24,11 @@ extends Reducer<Text, Text, Text, Text> {
         Map<String,List<Float>> cloud_map = new TreeMap<>();
         Map<String,Float> top_wind_map = new TreeMap<>();
         Map<String,Float> top_cloud_map = new TreeMap<>();
+
+        ArrayList<String> cloud_rank = new ArrayList<>();
+        ArrayList<String> wind_rank = new ArrayList<>();
+        Map<String,Float> combined_rank_map = new TreeMap<>();
+
         Float soil_porosity = 0f;
         int index = 0;
         for(Text record : values) {
@@ -117,27 +122,43 @@ extends Reducer<Text, Text, Text, Text> {
 
 
         // Location for combined wind and solar farm
-        Float sum = 0f;
-        for(int i = sorted_wind.size()/2;i<sorted_wind.size();i++)
-        {
-            sum+=(new ArrayList<Float>(sorted_wind.values())).get(i);
-        }
-        Float top_avg_wind = sum/(sorted_wind.size()/2);
+        // Using Rankings system
+        // Map has structure <Geohash, Rankings>
 
-        sum = 0f;
-        for(int i = 0;i<sorted_wind.size()/2;i++)
-        {
-            sum+=(new ArrayList<Float>(sorted_cloud.values())).get(i);
-        }
-        Float low_avg_cloud = sum/(sorted_cloud.size()/2);
+        // Creating rank list of wind and cloud maps
 
-        for(Text record : values) {
-            String rec = record.toString();
-            List<String> data = Arrays.asList(rec.split(","));
-            String geohash = data.get(0);
-            Float wind_speed = Float.parseFloat(data.get(1));
-            Float cloud_cover = Float.parseFloat(data.get(2));
-            soil_porosity = Float.parseFloat(data.get(3));
+        Iterator wind_it = top_wind_map.entrySet().iterator();
+        while(wind_it.hasNext())
+        {
+            Map.Entry pair = (Map.Entry) wind_it.next();
+            wind_rank.add((String)pair.getKey());
+        }
+
+        // Reversing wind rank, since higher winds are at the end of the list in top_wind_map
+        Collections.reverse(wind_rank);
+
+        Iterator cloud_it = top_cloud_map.entrySet().iterator();
+        while(cloud_it.hasNext())
+        {
+            Map.Entry pair = (Map.Entry) cloud_it.next();
+            cloud_rank.add((String)pair.getKey());
+        }
+
+        for(String geo: wind_rank)
+        {
+            Float rank = (wind_rank.indexOf(geo)+cloud_rank.indexOf(geo))/(float)2;
+            combined_rank_map.put(geo,rank);
+        }
+
+        // Sorting Combined rank map
+        LinkedHashMap<String,Float> sorted_ranks = OrderByValue(combined_rank_map);
+
+
+        for(int i = 0;i<top_count;i++)
+        {
+            String combined_geo = (new ArrayList<String>(sorted_ranks.keySet())).get(i);
+            context.write(key,new Text("Combined Wind and Solar farm\n" +
+                    "Cloud: "+top_cloud_map.get(combined_geo)+" Wind: "+top_wind_map.get(combined_geo)));
         }
 
     }
