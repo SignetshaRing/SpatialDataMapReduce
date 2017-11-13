@@ -72,6 +72,7 @@ extends Reducer<Text, Text, Text, Text> {
                 PrintWriter out = new PrintWriter(bw))
             {
                 out.println(output);
+                fw.close();
             } catch (IOException e) {
                 System.out.println("Error while writing to File");
             }
@@ -83,6 +84,7 @@ extends Reducer<Text, Text, Text, Text> {
                 PrintWriter out = new PrintWriter(bw))
             {
                 out.println(output);
+                fw.close();
             } catch (IOException e) {
                 System.out.println("Error while writing to File");
             }

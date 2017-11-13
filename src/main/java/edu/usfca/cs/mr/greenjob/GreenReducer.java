@@ -116,14 +116,30 @@ extends Reducer<Text, Text, Text, Text> {
         }
 
 
-//        Date date = new Date(Long.parseLong(dry_ts));
-//        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(date);
-//        date_format = format.format(date);
-//        dry_month = Integer.toString(cal.get(Calendar.MONTH));
+        // Location for combined wind and solar farm
+        Float sum = 0f;
+        for(int i = sorted_wind.size()/2;i<sorted_wind.size();i++)
+        {
+            sum+=(new ArrayList<Float>(sorted_wind.values())).get(i);
+        }
+        Float top_avg_wind = sum/(sorted_wind.size()/2);
 
-//        context.write(key, new FloatWritable(total_humid/index));
+        sum = 0f;
+        for(int i = 0;i<sorted_wind.size()/2;i++)
+        {
+            sum+=(new ArrayList<Float>(sorted_cloud.values())).get(i);
+        }
+        Float low_avg_cloud = sum/(sorted_cloud.size()/2);
+
+        for(Text record : values) {
+            String rec = record.toString();
+            List<String> data = Arrays.asList(rec.split(","));
+            String geohash = data.get(0);
+            Float wind_speed = Float.parseFloat(data.get(1));
+            Float cloud_cover = Float.parseFloat(data.get(2));
+            soil_porosity = Float.parseFloat(data.get(3));
+        }
+
     }
 
 
