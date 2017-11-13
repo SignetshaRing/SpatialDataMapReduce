@@ -5,10 +5,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
@@ -61,7 +60,10 @@ extends Mapper<LongWritable, Text, Text, Text> {
                     if(temp>293 && temp<303)
 //                    if(temp>293)
                     {
-                        String record = timestamp+","+temp;
+                        Date date = new Date(Long.parseLong(timestamp));
+                        DateFormat format = new SimpleDateFormat("MM/yyyy");
+                        String date_format = format.format(date);
+                        String record = date_format+","+temp;
                         context.write(new Text(geohash), new Text(record));
                     }
 
