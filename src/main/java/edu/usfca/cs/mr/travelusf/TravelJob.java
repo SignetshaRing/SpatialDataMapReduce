@@ -24,7 +24,7 @@ public class TravelJob {
             // Mapper
             job.setMapperClass(TravelMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(TravelReducer.class);
+//            job.setCombinerClass(TravelReducer.class);
             // Reducer
             job.setReducerClass(TravelReducer.class);
             // Outputs from the Mapper.

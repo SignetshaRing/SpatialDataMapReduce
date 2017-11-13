@@ -60,10 +60,11 @@ extends Mapper<LongWritable, Text, Text, Text> {
                     if(temp>293 && temp<303)
 //                    if(temp>293)
                     {
-                        Date date = new Date(Long.parseLong(timestamp));
-                        DateFormat format = new SimpleDateFormat("MM/yyyy");
-                        String date_format = format.format(date);
-                        String record = date_format+","+temp;
+//                        Date date = new Date(Long.parseLong(timestamp));
+//                        DateFormat format = new SimpleDateFormat("MM/yyyy");
+//                        String date_format = format.format(date);
+//                        String record = date_format+","+temp;
+                        String record = timestamp+","+temp;
                         context.write(new Text(geohash), new Text(record));
                     }
 
