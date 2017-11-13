@@ -3,10 +3,7 @@ package edu.usfca.cs.mr.climatetrend;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,14 +63,31 @@ extends Reducer<Text, Text, Text, Text> {
         context.write(key, new Text(output));
 
         String file_name = "Climate_Trend_"+geohash+".txt";
-        try(FileWriter fw = new FileWriter(file_name, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw))
+        File f = new File(file_name);
+
+        if(f.exists())
         {
-            out.println(output);
-        } catch (IOException e) {
-            System.out.println("Error while writing to File");
+            try(FileWriter fw = new FileWriter(file_name, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(output);
+            } catch (IOException e) {
+                System.out.println("Error while writing to File");
+            }
         }
+        else
+        {
+            try(FileWriter fw = new FileWriter(file_name);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(output);
+            } catch (IOException e) {
+                System.out.println("Error while writing to File");
+            }
+        }
+
 
     }
 
