@@ -34,26 +34,28 @@ extends Reducer<Text, Text, Text, Text> {
             Float cloud_cover = Float.parseFloat(data.get(2));
             soil_porosity = Float.parseFloat(data.get(3));
 
-            context.write(key, new Text("Soil:"+soil_porosity+"Geohash"+geohash));
+//            It is observed that for geohashes on land, soil porosity is 0.5 whereas for geohashes on water
+//            it is 0.0.
+//            context.write(key, new Text("Soil:"+soil_porosity+"Geohash"+geohash));
 
-            if(!wind_map.containsKey(geohash))
+            if(!wind_map.containsKey(geohash) && soil_porosity.equals(0.5f))
             {
                 List wind = new ArrayList();
                 wind.add(wind_speed);
                 wind_map.put(geohash,wind);
             }
-            else
+            else if(wind_map.containsKey(geohash) && soil_porosity.equals(0.5f))
             {
                 wind_map.get(geohash).add(wind_speed);
             }
 
-            if(!cloud_map.containsKey(geohash))
+            if(!cloud_map.containsKey(geohash) && soil_porosity.equals(0.5f))
             {
                 List cloud = new ArrayList();
                 cloud.add(cloud_cover);
                 cloud_map.put(geohash,cloud);
             }
-            else
+            else if(cloud_map.containsKey(geohash) && soil_porosity.equals(0.5f))
             {
                 cloud_map.get(geohash).add(cloud_cover);
             }
@@ -103,14 +105,14 @@ extends Reducer<Text, Text, Text, Text> {
         {
             String cloud_key = (new ArrayList<String>(sorted_cloud.keySet())).get(i);
             Float value = (new ArrayList<Float>(sorted_cloud.values())).get(i);
-            context.write(key,new Text("Cloud: "+cloud_key+" "+Float.toString(value)+"\nSoil:"+soil_porosity));
+            context.write(key,new Text("Cloud: "+cloud_key+" "+Float.toString(value)));
         }
 
         for(int i = 0;i<top_count;i++)
         {
             String wind_key = (new ArrayList<String>(sorted_wind.keySet())).get(sorted_wind.size()-i-1);
             Float value = (new ArrayList<Float>(sorted_wind.values())).get(sorted_wind.size()-i-1);
-            context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)+"\nSoil:"+soil_porosity));
+            context.write(key,new Text("Wind: "+wind_key+" "+Float.toString(value)));
         }
 
 
