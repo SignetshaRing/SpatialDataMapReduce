@@ -47,10 +47,29 @@ In order to determine the location of the Bay Area, http://geohash.gofreerange.c
 ><b> Travel Itinerary </b><br>
 
 ><b> Green Energy</b><br>
+The following Geohashes were found for a subset of the dataset:<br>
+**Solar Farm Locations**<br>
+Cloud: 9qjbwfvtjkxb 0.0<br>
+Cloud: 9qn0463ep8h0 0.0<br>
+Cloud: 9qn09vgek0eb 0.0<br>
+**Wind Farm Locations**<br>
+Wind: c81ctmd9mpkp 21.580797<br>
+Wind: c81cd59207eb 21.3308<br>
+Wind: c81cjen0n82p 21.2683<br>
+**Combined Solar and Wind Farm Locations**<br>
+dnxm01qr5jup<br>
+Cloud: 0.0 Wind: 13.768299<br>
+dnxjtrp8n1up<br>
+Cloud: 0.5 Wind: 14.455799<br>
+dnz883hf5d00<br>
+Cloud: 0.5 Wind: 14.237049<br>
 
+The combined locations were found by taking a mean of the indices of the geohashes on both the Wind and Solar farm lists, and sorting the resulting lists and sorting the result.
+It was reassuring to see that some of the wind farm locations were along the central strip as can be seen in this heat map.<br>
+https://windexchange.energy.gov/maps-data/319
 
 ><b> Climate Chart</b><br>
 A climate chart for a particular Geohash can be seen here:<br>
-The location chosen was the geohash with the hottest temperature as seen above:
+The location chosen was the geohash with the hottest temperature as seen:
 <img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/climate_overview.png" alt="climate overview"><br>
 
