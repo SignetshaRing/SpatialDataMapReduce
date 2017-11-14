@@ -21,8 +21,8 @@ Some Geohashes which had significant amount of snowcover throughout the year<br>
 *c44nftm8uizz*<br>
 *c43m2snbpzbp*<br>
 
-As seen from the image, it wasn't surprising that some of these Geohashes were located on snow covered moutains.
-
+As seen from the image, it wasn't surprising that some of these Geohashes were located on snow covered moutains.<br>
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/Screen%20Shot%202017-11-13%20at%205.54.16%20PM.png" alt="Snow Cover" width="500" height="500">
 ><b>Hottest Temperature in the dataset</b><br>
 The hottest temperature was found near Cancun in the Mexican state of **Quintana Roo at a high of 57.85 Celsius(331K)** which occured in the month of **August**.<br> *Record: d5dpds10m55b,331.39062*<br>
 Although online validation couldn't be found for the abnormally high temperature in Cacncun, it can not be considered an anomaly as values close to 55 Celsius are known to occur in countries located along the equator of the Earth.
@@ -32,7 +32,9 @@ Although online validation couldn't be found for the abnormally high temperature
 *dqvu8,1.0*<br>
 *dx6ry,1.0*<br>
 *dmpnh,1.0*<br>
-*Interestingly,* it was found that all of these locations were located near the Bermuda Triangle(!!!). This would confirm the intense lightning storms that are known to occur in the area, that have culminated in numerous disappearnces of flights in the area.
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/geo_b_triangle.png" alt="Geohash B-Triangle" width="500" height="500"><br>
+*Interestingly,* it was found that all of these locations were located near the Bermuda Triangle(!!!). This would confirm the intense lightning storms that are known to occur in the area, that have culminated in numerous disappearnces of flights in the area.<br>
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/b_triangle.png" alt="Bermuda Triangle" width="500" height="500">
 
 ><b> Driest Month in the Bay Area</b><br>
 Driest month in the Bay area was found to be **March**. <br>
