@@ -47,7 +47,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
             else if(index == 18)
             {
 //                land_cover_land1_sea0_surface
-                if(Integer.parseInt(token)==1)
+                if(Float.parseFloat(token)==1.0)
                 {
                     isLand=true;
                 }
