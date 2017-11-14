@@ -38,7 +38,11 @@ Although online validation couldn't be found for the abnormally high temperature
 
 ><b> Driest Month in the Bay Area</b><br>
 Driest month in the Bay area was found to be **March**. <br>
-In order to determine the location of the Bay Area, http://geohash.gofreerange.com was used. The following locations were finalised: *"9q8y","9q8v","9q8u","9q8g","9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"*
+In order to determine the location of the Bay Area, http://geohash.gofreerange.com was used. The following locations were finalised: *"9q8y","9q8v","9q8u","9q8g","9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"*<br>
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/bay_area_geohash.png" alt="bay area geohash"><br>
+<br>
+>The precipitation histogram for the Bay Area looks as follows:<br>
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/bay_area_humid.png" alt="bay area humidity"><br>
 
 ><b> Travel Itinerary </b><br>
 
@@ -46,5 +50,7 @@ In order to determine the location of the Bay Area, http://geohash.gofreerange.c
 
 
 ><b> Climate Chart</b><br>
-A climate chart for the geohash with the hottest temperature as found above can be seen here:
+A climate chart for a particular Geohash can be seen here:<br>
+The location chosen was the geohash with the hottest temperature as seen above:
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/climate_overview.png" alt="climate overview"><br>
 
