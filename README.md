@@ -10,8 +10,26 @@ The project specification defines several questions that you will answer with Ma
 
 ## Deliverable I
 
-Responses go here.
+###Warmup
 
-## Deliverable II
+<b>Number of Records in the Dataset</b><br>
+The number of records in the entire nam dataset was found to be <br>
+<b>323759744</b>
 
-Responses go here.
+<b>Geohashes that have snow throughout the year</b><br>
+fc2jr4sp5wh0
+
+<b>Hottest Temperature in the dataset</b><br>
+
+
+### Analysis
+><b> Geohashes where its high chances of being struck by lightning</b><br>
+
+><b> Driest Month in the Bay Area</b><br>
+
+><b> Travel Itinerary </b><br>
+
+><b> Green Energy</b><br>
+
+><b> Climate Chart</b><br>
+
