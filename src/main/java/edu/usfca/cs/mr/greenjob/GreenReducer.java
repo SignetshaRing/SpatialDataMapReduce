@@ -9,8 +9,8 @@ import java.util.*;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * "record", list<"geohash,windspeed,cloudcover,soilporosity"> pairs.
+ * Emits <"Wind|Cloud|Combined", "Geohash, Cloudcover, Wind speed"> pairs.
  */
 public class GreenReducer
 extends Reducer<Text, Text, Text, Text> {
@@ -29,7 +29,7 @@ extends Reducer<Text, Text, Text, Text> {
         ArrayList<String> wind_rank = new ArrayList<>();
         Map<String,Float> combined_rank_map = new TreeMap<>();
 
-        Float soil_porosity = 0f;
+        Float soil_porosity;
         int index = 0;
         for(Text record : values) {
             String rec = record.toString();
@@ -38,10 +38,6 @@ extends Reducer<Text, Text, Text, Text> {
             Float wind_speed = Float.parseFloat(data.get(1));
             Float cloud_cover = Float.parseFloat(data.get(2));
             soil_porosity = Float.parseFloat(data.get(3));
-
-//            It is observed that for geohashes on land, soil porosity is 0.5 whereas for geohashes on water
-//            it is 0.0.
-//            context.write(key, new Text("Soil:"+soil_porosity+"Geohash"+geohash));
 
             if(!wind_map.containsKey(geohash) && soil_porosity.equals(0.5f))
             {
@@ -163,7 +159,11 @@ extends Reducer<Text, Text, Text, Text> {
 
     }
 
-
+    /**
+     * Fucntion that Sorts an input hashmap by its value
+     * @param map
+     * @return sorted LinkedHashMap
+     */
     public LinkedHashMap<String,Float> OrderByValue(Map<String,Float> map)
     {
         Set<Map.Entry<String, Float>> set = map.entrySet();

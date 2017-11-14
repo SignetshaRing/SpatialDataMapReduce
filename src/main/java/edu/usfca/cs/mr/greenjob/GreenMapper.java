@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line, split them into words. Emit <"record", "geohash,windspeed,cloudcover,porosity> pairs.
  */
 public class GreenMapper
 extends Mapper<LongWritable, Text, Text, Text> {
@@ -21,15 +21,15 @@ extends Mapper<LongWritable, Text, Text, Text> {
         throws IOException, InterruptedException {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
-        // emit word, count pairs.
         int index = 0;
 
         String geohash = "";
         String cloud_cover = "";
         String wind_speed = "";
-        String soil_porosity = "";
+        String soil_porosity;
         boolean isLand = false;
 
+        // List of Geohash for United States
         List<String> na_geohash = new ArrayList<>(Arrays.asList("c2","c8","cb","f0","9r","9x","9z","9q",
                 "9w","9y","9v","dp","dr",
                 "dn","dq","dj"));
@@ -43,12 +43,6 @@ extends Mapper<LongWritable, Text, Text, Text> {
             else if(index == 16)
             {
                 cloud_cover = token;
-
-//                if(na_geohash.contains(geohash.substring(0,2)))
-//                {
-//                    String record = geohash+","+wind_speed+","+cloud_cover;
-//                    context.write(new Text("record"), new Text(record));
-//                }
             }
             else if(index == 18)
             {
@@ -60,8 +54,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
             }
             else if(index == 27) {
                 soil_porosity = token;
-                // Soil porosity, to make sure we arent taking values for wind farms in the middle
-                // of the ocean
+                // Soil porosity, to make sure we arent taking values unsuitable for construction
 
                 if(isLand)
                 {

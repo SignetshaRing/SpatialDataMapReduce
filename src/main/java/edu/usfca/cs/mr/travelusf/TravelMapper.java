@@ -56,7 +56,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
             else if(index == 29)
             {
 //                categorical_rain_yes1_no0_surface
-                if(Integer.parseInt(token)==0)
+                if(Float.parseFloat(token)==0.0)
                 {
                     isRainy = false;
                 }

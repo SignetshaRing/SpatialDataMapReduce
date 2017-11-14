@@ -19,7 +19,7 @@ public class GreenJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Green job");
+            Job job = Job.getInstance(conf, "green job");
             // Current class.
             job.setJarByClass(GreenJob.class);
             // Mapper
