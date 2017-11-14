@@ -24,7 +24,7 @@ Some Geohashes which had significant amount of snowcover throughout the year<br>
 As seen from the image, it wasn't surprising that some of these Geohashes were located on snow covered moutains.
 
 ><b>Hottest Temperature in the dataset</b><br>
-The hottest temperature was found near Cancun in the Mexican state of **Quintana Roo at a high of 57.85 Celsius(331K)** which occured in the month of **August**. *Record: d5dpds10m55b,331.39062*
+The hottest temperature was found near Cancun in the Mexican state of **Quintana Roo at a high of 57.85 Celsius(331K)** which occured in the month of **August**.<br> *Record: d5dpds10m55b,331.39062*<br>
 Although online validation couldn't be found for the abnormally high temperature in Cacncun, it can not be considered an anomaly as values close to 55 Celsius are known to occur in countries located along the equator of the Earth.
 
 ### Analysis
@@ -35,10 +35,14 @@ Although online validation couldn't be found for the abnormally high temperature
 *Interestingly,* it was found that all of these locations were located near the Bermuda Triangle(!!!). This would confirm the intense lightning storms that are known to occur in the area, that have culminated in numerous disappearnces of flights in the area.
 
 ><b> Driest Month in the Bay Area</b><br>
+Driest month in the Bay area was found to be **March**. <br>
+In order to determine the location of the Bay Area, http://geohash.gofreerange.com was used. The following locations were finalised: *"9q8y","9q8v","9q8u","9q8g","9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"*
 
 ><b> Travel Itinerary </b><br>
 
 ><b> Green Energy</b><br>
 
+
 ><b> Climate Chart</b><br>
+A climate chart for the geohash with the hottest temperature as found above can be seen here:
 
