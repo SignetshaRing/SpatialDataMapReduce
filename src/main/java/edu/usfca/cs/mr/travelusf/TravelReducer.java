@@ -6,6 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,13 +23,21 @@ extends Reducer<Text, Text, Text, Text> {
     protected void reduce(
             Text key, Iterable<Text> values, Context context)
     throws IOException, InterruptedException {
+
+        List<String> geohash_list = new ArrayList<>();
         for(Text record : values){
             String rec = record.toString();
             List<String> data = Arrays.asList(rec.split(","));
             String geohash = data.get(0);
             Float temp = Float.parseFloat(data.get(1));
 
-            context.write(key,new Text(geohash+", "+Float.toString(temp)));
+            if(!geohash_list.contains(geohash))
+            {
+                geohash_list.add(geohash);
+                context.write(key,new Text(geohash+", "+Float.toString(temp)));
+            }
+
+
         }
 
     }
