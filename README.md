@@ -65,8 +65,12 @@ dnz883hf5d00<br>
 Cloud: 0.5 Wind: 14.237049<br>
 
 The combined locations were found by taking a mean of the indices of the geohashes on both the Wind and Solar farm lists, and sorting the resulting lists and sorting the result.
-It was reassuring to see that some of the wind farm locations were along the central strip as can be seen in this heat map.<br>
+It was reassuring to see that some of the wind farm locations were along the central strip of the united states which is known to have high wind speeds as can be seen in this heat map.<br>
 https://windexchange.energy.gov/maps-data/319
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/wind_farm.png" alt="windfarm"><br>
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/heat.png" alt="heatmap"><br>
+>Also surprisingly when trying to locate one of the geohashes for the Solar farm, the following image popped up, which surely enough shows what look like solar panels right next to the predicted suitable location for a solar farm.(Talk about production value :P)
+<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/Screen%20Shot%202017-11-12%20at%207.24.28%20PM.png" alt="solar farm"><br>
 
 ><b> Climate Chart</b><br>
 A climate chart for a particular Geohash can be seen here:<br>
