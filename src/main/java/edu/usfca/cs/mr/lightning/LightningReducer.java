@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * "record", list<"geohash,lightning"> pairs. Picks the top 3 records with highest lightning values.
+ * Emits <"record", "geohash,lightning"> pairs.
  */
 public class LightningReducer
 extends Reducer<Text, Text, Text, Text> {
@@ -53,7 +53,7 @@ extends Reducer<Text, Text, Text, Text> {
 
         // Since only top 3 geohashes were required separate variables for each were used
         // as opposed to storing all geohashes and sorting according to Lightning values
-        // as that would occur a significant time penalty O(nLog(n))
+        // as that would incur a significant time penalty O(nLog(n))
         context.write(key, new Text(topGeohash+","+topLightning.toString()));
         context.write(key, new Text(top2Geohash+","+top2Lightning.toString()));
         context.write(key, new Text(top3Geohash+","+top3Lightning.toString()));

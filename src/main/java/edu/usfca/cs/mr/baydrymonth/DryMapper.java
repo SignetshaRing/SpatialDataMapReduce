@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line, split them into words. Emit <"MM/yyyy", humidity> pairs.
  */
 public class DryMapper
 extends Mapper<LongWritable, Text, Text, FloatWritable> {
@@ -21,11 +21,10 @@ extends Mapper<LongWritable, Text, Text, FloatWritable> {
         throws IOException, InterruptedException {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
-        // emit word, count pairs.
         int index = 0;
         String timestamp = "";
         String geohash = "";
-        String humid = "";
+        String humid ;
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 0)
@@ -35,8 +34,7 @@ extends Mapper<LongWritable, Text, Text, FloatWritable> {
             else if(index == 12)
             {
                 humid = token;
-                // Limiting the data to be MapReduced by only passing
-                // geohashes starting with 9q
+                // Bay Area geohashes as acquired from geohash freerange site
                 List<String> bay_area = new ArrayList<>(Arrays.asList("9q8y","9q8v","9q8u","9q8g",
                         "9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"));
                 if(bay_area.contains(geohash.substring(0,4)))
@@ -47,7 +45,6 @@ extends Mapper<LongWritable, Text, Text, FloatWritable> {
                     Date date = new Date(Long.parseLong(timestamp));
                     DateFormat format = new SimpleDateFormat("MM/yyyy");
                     String date_format = format.format(date);
-
 
                     context.write(new Text(date_format), new FloatWritable(Float.parseFloat(record)));
                 }

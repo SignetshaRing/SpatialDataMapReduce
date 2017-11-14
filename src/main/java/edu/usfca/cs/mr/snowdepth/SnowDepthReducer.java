@@ -13,8 +13,8 @@ import static java.lang.Boolean.TRUE;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * geohash, list<snowdepth> pairs.  Checks every snowdepth value per Geohash, discards if snoedepth is 0.
+ * Emits <geohash, max_snowdepth> pairs.
  */
 public class SnowDepthReducer
 extends Reducer<Text, FloatWritable, Text, FloatWritable> {
@@ -23,9 +23,8 @@ extends Reducer<Text, FloatWritable, Text, FloatWritable> {
     protected void reduce(
             Text key, Iterable<FloatWritable> values, Context context)
     throws IOException, InterruptedException {
-        int count = 0;
         boolean snow_exists = TRUE;
-        // calculate the total count
+
         float max_depth = 0;
         for(FloatWritable val : values){
             if(val.get()>max_depth)

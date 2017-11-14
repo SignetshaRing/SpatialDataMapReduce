@@ -28,6 +28,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
         String cloud_cover = "";
         String wind_speed = "";
         String soil_porosity = "";
+        boolean isLand = false;
 
         List<String> na_geohash = new ArrayList<>(Arrays.asList("c2","c8","cb","f0","9r","9x","9z","9q",
                 "9w","9y","9v","dp","dr",
@@ -49,15 +50,27 @@ extends Mapper<LongWritable, Text, Text, Text> {
 //                    context.write(new Text("record"), new Text(record));
 //                }
             }
+            else if(index == 18)
+            {
+//                land_cover_land1_sea0_surface
+                if(Integer.parseInt(token)==1)
+                {
+                    isLand=true;
+                }
+            }
             else if(index == 27) {
                 soil_porosity = token;
                 // Soil porosity, to make sure we arent taking values for wind farms in the middle
                 // of the ocean
 
-                if (na_geohash.contains(geohash.substring(0, 2))) {
-                    String record = geohash + "," + wind_speed + "," + cloud_cover + "," + soil_porosity;
-                    context.write(new Text("record"), new Text(record));
+                if(isLand)
+                {
+                    if (na_geohash.contains(geohash.substring(0, 2))) {
+                        String record = geohash + "," + wind_speed + "," + cloud_cover + "," + soil_porosity;
+                        context.write(new Text("record"), new Text(record));
+                    }
                 }
+
             }
             index++;
         }

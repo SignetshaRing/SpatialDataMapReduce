@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * timestamp(MM/yyyy), list<"geohash,temp"> pairs.
+ * Emits <Timestamp, "geohash,temp"> pairs.
  */
 public class TravelReducer
 extends Reducer<Text, Text, Text, Text> {
@@ -25,14 +25,10 @@ extends Reducer<Text, Text, Text, Text> {
         for(Text record : values){
             String rec = record.toString();
             List<String> data = Arrays.asList(rec.split(","));
-            String timestamp = data.get(0);
+            String geohash = data.get(0);
             Float temp = Float.parseFloat(data.get(1));
 
-            Date date = new Date(Long.parseLong(timestamp));
-            DateFormat format = new SimpleDateFormat("MM/yyyy");
-            String date_format = format.format(date);
-
-            context.write(key,new Text(date_format+", "+Float.toString(temp)));
+            context.write(key,new Text(geohash+", "+Float.toString(temp)));
         }
 
     }

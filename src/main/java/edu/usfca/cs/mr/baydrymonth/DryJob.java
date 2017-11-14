@@ -19,13 +19,13 @@ public class DryJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Dry job");
+            Job job = Job.getInstance(conf, "dry job");
             // Current class.
             job.setJarByClass(DryJob.class);
             // Mapper
             job.setMapperClass(DryMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(DryReducer.class);
+//            job.setCombinerClass(DryReducer.class);
             // Reducer
             job.setReducerClass(DryReducer.class);
             // Outputs from the Mapper.

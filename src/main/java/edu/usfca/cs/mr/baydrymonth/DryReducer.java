@@ -11,8 +11,8 @@ import java.util.*;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * date(MM/yyyy), list<humidity> pairs. Calculates the average humidity for each month.
+ * Emits <date, average humidity> pairs.
  */
 public class DryReducer
 extends Reducer<Text, FloatWritable, Text, FloatWritable> {
@@ -29,15 +29,7 @@ extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
             total_humid+=humid;
             index+=1;
-
         }
-
-//        Date date = new Date(Long.parseLong(dry_ts));
-//        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(date);
-//        date_format = format.format(date);
-//        dry_month = Integer.toString(cal.get(Calendar.MONTH));
 
         context.write(key, new FloatWritable(total_humid/index));
     }

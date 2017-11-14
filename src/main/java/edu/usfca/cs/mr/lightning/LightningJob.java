@@ -19,13 +19,13 @@ public class LightningJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Lightning job");
+            Job job = Job.getInstance(conf, "lightning job");
             // Current class.
             job.setJarByClass(LightningJob.class);
             // Mapper
             job.setMapperClass(LightningMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(LightningReducer.class);
+//            job.setCombinerClass(LightningReducer.class);
             // Reducer
             job.setReducerClass(LightningReducer.class);
             // Outputs from the Mapper.

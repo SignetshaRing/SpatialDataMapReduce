@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line, split them into words. Emit <"record", "geohash, ightning"> pairs.
  */
 public class LightningMapper
 extends Mapper<LongWritable, Text, Text, Text> {
@@ -18,10 +18,9 @@ extends Mapper<LongWritable, Text, Text, Text> {
         throws IOException, InterruptedException {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
-        // emit word, count pairs.
         int index = 0;
         String geohash = "";
-        String light = "";
+        String light;
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 1)
@@ -30,7 +29,7 @@ extends Mapper<LongWritable, Text, Text, Text> {
             {
                 light = token;
                 String record = geohash+","+light;
-                context.write(new Text("record"), new Text(record));
+                context.write(new Text("lightning:"), new Text(record));
             }
             index++;
         }

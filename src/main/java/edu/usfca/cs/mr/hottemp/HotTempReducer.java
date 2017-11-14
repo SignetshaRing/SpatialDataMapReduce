@@ -6,13 +6,16 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Reducer: Input to the reducer is the output from the mapper. It receives
- * word, list<count> pairs.  Sums up individual counts per given word. Emits
- * <word, total count> pairs.
+ * record, list<"timestamp,geohash,temp"> pairs. Checks for the highest temperature among all records.
+ * Emits <"record","timestamp,geohash,highest_temp"> record.
  */
 public class HotTempReducer
 extends Reducer<Text, Text, Text, Text> {
@@ -21,8 +24,6 @@ extends Reducer<Text, Text, Text, Text> {
     protected void reduce(
             Text key, Iterable<Text> values, Context context)
     throws IOException, InterruptedException {
-        int count = 0;
-        // calculate the total count
         String finalTS = "";
         String finalGeohash = "";
         Float finalTemp = 0f;
@@ -40,7 +41,10 @@ extends Reducer<Text, Text, Text, Text> {
                 finalGeohash = geohash;
             }
         }
-        context.write(key, new Text(finalTS+","+finalGeohash+","+finalTemp.toString()));
+
+        Date date = new Date(Long.parseLong(finalTS));
+
+        context.write(key, new Text(date+" ,\n"+finalGeohash+", "+finalTemp));
     }
 
 }

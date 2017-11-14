@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line, split them into words. Emit <"record", "timestamp,geohash,temp"> pairs.
  */
 public class HotTempMapper
 extends Mapper<LongWritable, Text, Text, Text> {
@@ -19,11 +19,10 @@ extends Mapper<LongWritable, Text, Text, Text> {
         throws IOException, InterruptedException {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
-        // emit word, count pairs.
         int index = 0;
         String timestamp = "";
         String geohash = "";
-        String temp = "";
+        String temp;
         while (itr.hasMoreTokens()) {
             String token = itr.nextToken();
             if(index == 0)

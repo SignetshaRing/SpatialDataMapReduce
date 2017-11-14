@@ -18,7 +18,7 @@ public class TravelJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "USF Travel job");
+            Job job = Job.getInstance(conf, "USF travel job");
             // Current class.
             job.setJarByClass(TravelJob.class);
             // Mapper

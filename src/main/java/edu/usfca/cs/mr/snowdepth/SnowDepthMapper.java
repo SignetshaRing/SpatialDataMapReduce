@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * Mapper: Reads line by line, split them into words. Emit <word, 1> pairs.
+ * Mapper: Reads line by line, split them into words. Emit <geohash, snow-depth> pairs.
  */
 public class SnowDepthMapper
 extends Mapper<LongWritable, Text, Text, FloatWritable> {
@@ -20,7 +20,6 @@ extends Mapper<LongWritable, Text, Text, FloatWritable> {
         throws IOException, InterruptedException {
         // tokenize into words.
         StringTokenizer itr = new StringTokenizer(value.toString());
-        // emit word, count pairs.
         int index = 0;
         String geoHash = "";
         while (itr.hasMoreTokens()) {

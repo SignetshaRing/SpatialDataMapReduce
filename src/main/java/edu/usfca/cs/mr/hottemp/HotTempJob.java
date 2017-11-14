@@ -19,13 +19,13 @@ public class HotTempJob {
             Configuration conf = new Configuration();
             // Give the MapRed job a name. You'll see this name in the Yarn
             // webapp.
-            Job job = Job.getInstance(conf, "Hottest temp job");
+            Job job = Job.getInstance(conf, "hottest temp job");
             // Current class.
             job.setJarByClass(HotTempJob.class);
             // Mapper
             job.setMapperClass(HotTempMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(HotTempReducer.class);
+//            job.setCombinerClass(HotTempReducer.class);
             // Reducer
             job.setReducerClass(HotTempReducer.class);
             // Outputs from the Mapper.

@@ -26,7 +26,7 @@ public class SnowDepthJob {
             // Mapper
             job.setMapperClass(SnowDepthMapper.class);
             // Combiner. We use the reducer as the combiner in this case.
-            job.setCombinerClass(SnowDepthReducer.class);
+//            job.setCombinerClass(SnowDepthReducer.class);
             // Reducer
             job.setReducerClass(SnowDepthReducer.class);
             // Outputs from the Mapper.
