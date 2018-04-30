@@ -22,7 +22,7 @@ Some Geohashes which had significant amount of snowcover throughout the year<br>
 *c43m2snbpzbp*<br>
 
 As seen from the image, it wasn't surprising that some of these Geohashes were located on snow covered moutains.<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/Screen%20Shot%202017-11-13%20at%205.54.16%20PM.png" alt="Snow Cover" width="500" height="500">
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/Screen%20Shot%202017-11-13%20at%205.54.16%20PM.png" alt="Snow Cover" width="500" height="500">
 ><b><h4>Hottest Temperature in the dataset</h4></b><br>
 The hottest temperature was found near Cancun in the Mexican state of **Quintana Roo at a high of 57.85 Celsius(331K)** which occured in the month of **August**.<br> *Record: d5dpds10m55b,331.39062*<br>
 Although online validation couldn't be found for the abnormally high temperature in Cacncun, it can not be considered an anomaly as values close to 55 Celsius are known to occur in countries located along the equator of the Earth.
@@ -32,17 +32,17 @@ Although online validation couldn't be found for the abnormally high temperature
 *dqvu8,1.0*<br>
 *dx6ry,1.0*<br>
 *dmpnh,1.0*<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/geo_b_triangle.png" alt="Geohash B-Triangle" width="500" height="500"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/geo_b_triangle.png" alt="Geohash B-Triangle" width="500" height="500"><br>
 *Interestingly,* it was found that all of these locations were located near the Bermuda Triangle(!!!). This would confirm the intense lightning storms that are known to occur in the area, that have culminated in numerous disappearnces of flights in the area.<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/b_triangle.png" alt="Bermuda Triangle" width="500" height="500">
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/b_triangle.png" alt="Bermuda Triangle" width="500" height="500">
 
 ><b> <h4>Driest Month in the Bay Area</h4></b><br>
 Driest month in the Bay area was found to be **March**. <br>
 In order to determine the location of the Bay Area, http://geohash.gofreerange.com was used. The following locations were finalised: *"9q8y","9q8v","9q8u","9q8g","9q9n","9q9j","9q9h","9q95","9q97","9q9k","9q9m","9q9q"*<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/bay_area_geohash.png" alt="bay area geohash"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/bay_area_geohash.png" alt="bay area geohash"><br>
 <br>
 >The precipitation histogram for the Bay Area looks as follows:<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/bay_area_humid.png" alt="bay area humidity"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/bay_area_humid.png" alt="bay area humidity"><br>
 
 ><b><h4>Travel Itinerary</h4></b><br>
 <br>
@@ -55,7 +55,7 @@ dk2yqv -> The bahamas<br>
 
 As can be seen the travellers in question are people who like the outdoors and admire good architecure. So it would be reasonable to assume that preferable climate conditions for them would mean an ambient temperature between 20 and 30 degree Celsius, and of course no rain fall to foil their plans. These parameters were taken into consideration while picking which of these locations can be visited during a particular month by the travellers. *Note: Fair bit of manual observation was involved in the process.*<br><br>
 >The following Itenerary was built:<br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/Travel_it.png" alt="Itenerary"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/Travel_it.png" alt="Itenerary"><br>
 As can been seen from the itenerary, The bahamas, and the Griffith Observatory can be visited any time of the year, whereas the other places should probably be avoided during the winter. Therefore a suitable plan for the travellers would be as follows:<br>
 *Jan-Feb: Griffith Observatory,CA<br>
 Mar-April: Grand Canyon, AZ<br>
@@ -85,13 +85,13 @@ Cloud: 0.5 Wind: 14.237049<br><br>
 The combined locations were found by taking a mean of the indices of the geohashes on both the Wind and Solar farm lists, and sorting the resulting lists and sorting the result.<br>
 It was reassuring to see that some of the wind farm locations were along the central strip of the united states which is known to have high wind speeds as can be seen in this heat map.<br>
 https://windexchange.energy.gov/maps-data/319
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/wind_farm.png" alt="windfarm"><br>
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/heat.png" alt="heatmap"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/wind_farm.png" alt="windfarm"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/heat.png" alt="heatmap"><br>
 >Also surprisingly when trying to locate one of the geohashes for the Solar farm, the following image popped up, which surely enough shows what look like solar panels right next to the predicted suitable location for a solar farm.(Talk about production value :P)
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/Screen%20Shot%202017-11-12%20at%207.24.28%20PM.png" alt="solar farm"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/Screen%20Shot%202017-11-12%20at%207.24.28%20PM.png" alt="solar farm"><br>
 
 ><b><h4> Climate Chart</h4></b><br>
 A climate chart for a particular Geohash can be seen here:<br>
 The location chosen was the geohash with the hottest temperature as seen:
-<img src="https://github.com/cs686-bigdata/p2-cmattey/blob/master/images/climate_overview.png" alt="climate overview"><br>
+<img src="https://github.com/cmattey94/SpatialDataMapReduce/blob/master/images/climate_overview.png" alt="climate overview"><br>
 
